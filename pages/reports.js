@@ -164,7 +164,7 @@ export default function Reports() {
                 />
                 <Tooltip content={<TooltipStyled />} />
                 <Legend wrapperStyle={{ color: '#00e0ff' }} />
-                <Bar dataKey="Total" fill="#00ffc3" />
+                <Bar dataKey="total" fill="#00ffc3" />
               </BarChart>
             </ResponsiveContainer>
           </ChartWrapper>
