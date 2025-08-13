@@ -18,7 +18,6 @@ import {
   SectionTitle,
   ChartWrapper,
   TooltipContainer,
-  DotCircle,
   HighlightCard,
   Table,
   Title,
@@ -28,14 +27,15 @@ import Notification from '@/components/notification'
 
 function TooltipStyled({ active, payload, label }) {
   if (active && payload && payload.length) {
+    // Aseguramos que el valor sea numérico o cadena válida
     const value = payload[0]?.value
     const formattedValue =
-      typeof value === 'number'
+      typeof value === 'number' && !isNaN(value)
         ? value.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           })
-        : value
+        : value || '-'
 
     return (
       <TooltipContainer>
@@ -68,17 +68,55 @@ export default function Reports() {
             axios.get('/reports/total-income')
           ])
 
-        console.log('dailySales:', dailyRes.data)
-        console.log('monthlySales:', monthlyRes.data)
-        console.log('userSales:', userRes.data)
-        console.log('topProducts:', topProductsRes.data)
-        console.log('totalIncome:', totalIncomeRes.data)
+        // Validar y limpiar datos para dailySales
+        const cleanDailySales = Array.isArray(dailyRes.data)
+          ? dailyRes.data.map(item => ({
+              _id: String(item._id),
+              total: typeof item.total === 'number' && !isNaN(item.total) ? item.total : 0,
+              count: item.count || 0
+            }))
+          : []
 
-        setDailySales(dailyRes.data)
-        setMonthlySales(monthlyRes.data)
-        setUserSales(userRes.data)
-        setTopProducts(topProductsRes.data)
-        setTotalIncome(totalIncomeRes.data.total)
+        // Validar y limpiar datos para monthlySales
+        const cleanMonthlySales = Array.isArray(monthlyRes.data)
+          ? monthlyRes.data.map(item => ({
+              _id: String(item._id),
+              total: typeof item.total === 'number' && !isNaN(item.total) ? item.total : 0,
+              count: item.count || 0
+            }))
+          : []
+
+        // Validar userSales
+        const cleanUserSales = Array.isArray(userRes.data)
+          ? userRes.data.map(user => ({
+              name: user.name || 'Desconocido',
+              email: user.email || 'N/A',
+              total: typeof user.total === 'number' && !isNaN(user.total) ? user.total : 0,
+              count: user.count || 0
+            }))
+          : []
+
+        // Validar topProducts
+        const cleanTopProducts = Array.isArray(topProductsRes.data)
+          ? topProductsRes.data.map(product => ({
+              name: product.name || 'Sin nombre',
+              quantitySold:
+                typeof product.quantitySold === 'number' && !isNaN(product.quantitySold)
+                  ? product.quantitySold
+                  : 0,
+              total: typeof product.total === 'number' && !isNaN(product.total) ? product.total : 0
+            }))
+          : []
+
+        setDailySales(cleanDailySales)
+        setMonthlySales(cleanMonthlySales)
+        setUserSales(cleanUserSales)
+        setTopProducts(cleanTopProducts)
+        setTotalIncome(
+          typeof totalIncomeRes.data.total === 'number' && !isNaN(totalIncomeRes.data.total)
+            ? totalIncomeRes.data.total
+            : 0
+        )
       } catch (err) {
         if (err.response?.status === 403) {
           setNotification({
@@ -141,7 +179,6 @@ export default function Reports() {
                   dataKey="total"
                   stroke="#00ffc3"
                   strokeWidth={3}
-                  dot={<DotCircle />}
                 />
               </LineChart>
             </ResponsiveContainer>
