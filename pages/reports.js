@@ -27,7 +27,6 @@ import Notification from '@/components/notification'
 
 function TooltipStyled({ active, payload, label }) {
   if (active && payload && payload.length) {
-    // Aseguramos que el valor sea numérico o cadena válida
     const value = payload[0]?.value
     const formattedValue =
       typeof value === 'number' && !isNaN(value)
@@ -45,6 +44,11 @@ function TooltipStyled({ active, payload, label }) {
     )
   }
   return null
+}
+
+const CustomDot = ({ cx, cy, stroke, fill }) => {
+  if (cx === undefined || cy === undefined) return null
+  return <circle cx={cx} cy={cy} r={4} stroke={stroke} strokeWidth={2} fill={fill} />
 }
 
 export default function Reports() {
@@ -68,7 +72,6 @@ export default function Reports() {
             axios.get('/reports/total-income')
           ])
 
-        // Validar y limpiar datos para dailySales
         const cleanDailySales = Array.isArray(dailyRes.data)
           ? dailyRes.data.map(item => ({
               _id: String(item._id),
@@ -77,7 +80,6 @@ export default function Reports() {
             }))
           : []
 
-        // Validar y limpiar datos para monthlySales
         const cleanMonthlySales = Array.isArray(monthlyRes.data)
           ? monthlyRes.data.map(item => ({
               _id: String(item._id),
@@ -86,7 +88,6 @@ export default function Reports() {
             }))
           : []
 
-        // Validar userSales
         const cleanUserSales = Array.isArray(userRes.data)
           ? userRes.data.map(user => ({
               name: user.name || 'Desconocido',
@@ -96,7 +97,6 @@ export default function Reports() {
             }))
           : []
 
-        // Validar topProducts
         const cleanTopProducts = Array.isArray(topProductsRes.data)
           ? topProductsRes.data.map(product => ({
               name: product.name || 'Sin nombre',
@@ -132,7 +132,6 @@ export default function Reports() {
         console.error('Error fetching reports:', err)
       }
     }
-
     fetchReports()
   }, [])
 
@@ -179,6 +178,7 @@ export default function Reports() {
                   dataKey="total"
                   stroke="#00ffc3"
                   strokeWidth={3}
+                  dot={<CustomDot />}
                 />
               </LineChart>
             </ResponsiveContainer>
