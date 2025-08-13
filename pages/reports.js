@@ -28,10 +28,14 @@ import Notification from '@/components/notification'
 
 function TooltipStyled({ active, payload, label }) {
   if (active && payload && payload.length) {
-    const formattedValue = payload[0].value.toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })
+    const value = payload[0]?.value
+    const formattedValue =
+      typeof value === 'number'
+        ? value.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })
+        : value
 
     return (
       <TooltipContainer>
@@ -64,6 +68,12 @@ export default function Reports() {
             axios.get('/reports/total-income')
           ])
 
+        console.log('dailySales:', dailyRes.data)
+        console.log('monthlySales:', monthlyRes.data)
+        console.log('userSales:', userRes.data)
+        console.log('topProducts:', topProductsRes.data)
+        console.log('totalIncome:', totalIncomeRes.data)
+
         setDailySales(dailyRes.data)
         setMonthlySales(monthlyRes.data)
         setUserSales(userRes.data)
@@ -89,7 +99,10 @@ export default function Reports() {
   }, [])
 
   useEffect(() => {
-    if (notification.type === 'error' && notification.message.includes('Redirigiendo')) {
+    if (
+      notification.type === 'error' &&
+      notification.message.includes('Redirigiendo')
+    ) {
       const timer = setTimeout(() => {
         router.push('/dashboard')
       }, 3000)
@@ -183,7 +196,7 @@ export default function Reports() {
                 ))}
               </tbody>
             </Table>
-          </TableWrapper>  
+          </TableWrapper>
 
           <SectionTitle>Productos Más Vendidos</SectionTitle>
           <TableWrapper>
