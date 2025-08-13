@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         setIsAuthenticated(true);
       } catch (error) {
         setIsAuthenticated(false);
-        router.push('/login');
+        router.replace('/login');
       } finally {
         setLoading(false);
       }
@@ -34,7 +34,21 @@ export default function App({ Component, pageProps }) {
   }, [router.pathname]);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return (
+      <div
+        style={{
+          display: 'flex',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: '#00ffc3',
+          fontSize: '1.5rem',
+          backgroundColor: '#1a1a1a',
+        }}
+      >
+        Cargando...
+      </div>
+    );
   }
 
   if (!isAuthenticated && !publicPaths.includes(router.pathname)) {
