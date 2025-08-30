@@ -18,6 +18,7 @@ Este proyecto está diseñado para ofrecer una experiencia fluida e intuitiva, c
 -Gestor de paquetes: Yarn  
 
 ⚙️Instalación y ejecución
+
 1.-Clonar el repositorio:  
 git clone https://github.com/EdannyDev/pos-app.git
 
