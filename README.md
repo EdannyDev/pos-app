@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+🕹️POS Gamer - Frontend
 
-## Getting Started
+📌Descripción
+POS Gamer es el frontend de un sistema de punto de venta (POS) para una tienda de tecnología y productos electrónicos gamer.  
 
-First, run the development server:
+El sistema cuenta con dos roles principales:  
+-Administrador (admin): puede gestionar inventario, ventas, usuarios y generar reportes.  
+-Vendedor (Seller): puede crear y consultar inventario y ventas.  
 
-```bash
-npm run dev
-# or
+Este proyecto está diseñado para ofrecer una experiencia fluida e intuitiva, con reportes visuales para el análisis de ventas.  
+
+🛠️Tecnologías utilizadas
+-Framework: Next.js  
+-Gestión de datos y llamadas a API: Axios  
+-Estilos: Emotion Styled  
+-Iconos: FontAwesome  
+-Gráficas y reportes: Recharts  
+-Gestor de paquetes: Yarn  
+
+⚙️Instalación y ejecución
+1.-Clonar el repositorio:  
+git clone https://github.com/EdannyDev/pos-app.git
+
+2.-Instalar dependencias:
+yarn install
+
+3.-Ejecutar la aplicación:
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4.-Abrir en el navegador:
+http://localhost:3000
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+✨Características principales
+-Gestión de inventario (productos gamer/tecnología).
+-Registro y control de ventas.
+-Gestión de usuarios y roles (Admin y Seller).
+-Generación de reportes visuales con gráficas.
+-Interfaz intuitiva y responsiva.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+🔗Enlaces útiles
+Backend: https://github.com/EdannyDev/backend-pos
