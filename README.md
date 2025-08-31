@@ -32,6 +32,7 @@ yarn dev
 
 # 4. Abrir en el navegador
 http://localhost:3000
+
 ````
 
 ## ✨Características principales
