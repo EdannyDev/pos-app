@@ -42,5 +42,4 @@ http://localhost:3000
 - Interfaz intuitiva y responsiva.
 
 ## 🔗Enlaces útiles
-
 Backend: https://github.com/EdannyDev/backend-pos
